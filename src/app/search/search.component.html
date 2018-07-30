@@ -1,0 +1,18 @@
+<div class="container user-action-container">
+  <div class="d-flex justify-content-between align-items-end pt-5">
+    <div class="search-box">
+      <div class="pb-2 label">Search for an account by account name or ID</div>
+
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Enter an account name of ID" aria-label="Enter an account name of ID" [(ngModel)]="searchTerm">
+        <div class="input-group-append">
+          <button class="btn btn-primary-modulr" type="button" (click)="search()" [disabled]="!searchTerm">Go</button>
+        </div>
+      </div>
+
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary-modulr">Create new customer</button>
+    </div>
+  </div>
+</div>

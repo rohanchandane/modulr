@@ -1,20 +1,71 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<header>
+  <div class="container moular-header">
+      <div class="d-flex justify-content-between">
+        <div class="logo"></div>
+        <div class="bg-block"></div>
+      </div>
+  </div>
 
+  <nav class="navbar modulr-navbar">
+    <div class="container">
+        <div class="pr-4">
+          <div class="selected">
+              <a href="#">
+                Dashboard
+              </a>
+          </div>
+        </div>
+        <div class="pr-4">
+          <div class="">
+              <a href="#">
+                  Reports
+              </a>
+          </div>
+        </div>
+        <div class="pr-4">
+          <div class="">
+              <a href="#">
+                  Admin
+              </a>
+          </div>
+        </div>
+    </div>
+  </nav>
+</header>
+
+<section>
+ <app-search (searchEvent)="searchResults($event)"></app-search>
+</section>
+
+<section>
+  <div class="loader" *ngIf="searchInProgess">
+    <img class="spinner" src="./../assets/images/spinner.svg"/>
+  </div>
+  <div class="error" *ngIf="!searchInProgess && errorMsg">
+    No Results Found!
+  </div>
+  <div class="container" *ngIf="!searchInProgess && !errorMsg">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Account ID</th>
+              <th>Account name</th>
+              <th>Account number</th>
+              <th>Sort code</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let account of searchedResults">
+              <td>{{ account.id }}</td>
+              <td class="prominent">{{ account.name }}</td>
+              <td>{{ account.identifiers[0].accountNumber }}</td>
+              <td>{{ account.identifiers[0].sortCode }}</td>
+              <td class="prominent">{{ account.balance | currency:'GBP': '£' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</section>
